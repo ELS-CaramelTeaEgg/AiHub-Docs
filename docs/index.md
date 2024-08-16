@@ -7,7 +7,7 @@ hero:
   text: "We Can Do All Things"
   tagline: AiHub 文档记录
   image:
-    src: /logo.png
+    src: /public/logo.png
     alt: 上潮!
   actions:
     - theme: brand
