@@ -22,7 +22,8 @@ export default defineConfig({
         // 对应的板块下的二级目录
         items: [
           // text 就是标题，link 就是对应的文章
-          { text: '在本网站创建一个文档', link: '/guide/在本网站创建一个文档' }
+          { text: '在本网站创建一个文档', link: '/guide/在本网站创建一个文档' },
+          { text: 'VitePress+GithubPages构建网站', link: '/guide/VitePress+GithubPages构建网站' }
         ]
       },
       {
