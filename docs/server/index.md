@@ -34,8 +34,6 @@ Web 框架：SP3
 
 在 request header 里添加 key 为  `locale` 的属性即可，目前只支持两种：**zh_CN**, **en_US**
 
-### 
-
 ## 认证服务
 
 采用 RefreshToken + AccessToken 的结构，前者用来刷新后者，后者用来访问资源
@@ -52,6 +50,14 @@ Web 框架：SP3
 
 ### 刷新  AccessToken
 
-没写
+通过传入请求头参数 key 为 **RefreshCert**，value 为 **RefreshToken**(登录是分发的)的值，就可以刷新 AccessToken
 
-### 
+具体的参数细节可以看接口文档中 `/api/auth/refreshToken` 接口
+
+### Dev 环境下自动填充 AccessToken
+
+> 该项功能只在 dev 环境下生效，主要是针对 Server 调试接口每次要获取 AccessToken 过于麻烦了
+
+通过传入请求头参数 key 为 **Email**，value 为目标用户对象的邮箱即可
+
+![image-20240820100332083](index.assets/image-20240820100332083.png)
