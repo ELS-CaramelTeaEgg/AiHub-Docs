@@ -15,6 +15,8 @@ function createSidebarPlugin() {
       const sidebar = await generateSidebar(docsDir, sidebarConfig);
       config.vitepress.site.themeConfig.sidebar = sidebar;
     },
+
+    apply: 'build'
   };
 }
 
@@ -28,7 +30,7 @@ async function generateSidebar(dir, existingSidebar) {
       const filePath = join(dir, file);
       const stat = statSync(filePath);
       if (stat.isDirectory()) {
-        const items = [];
+        let items = [];
         const subDir = file;
         const subDirPath = join(dir, subDir);
   
@@ -42,17 +44,15 @@ async function generateSidebar(dir, existingSidebar) {
               link: `/${subDir}/${title.replace(/\s+/g, "-").toLowerCase()}`,
             };
           });
-        // console.log("🚀 ~ generateSidebar ~ markdownFiles:", markdownFiles)
   
         // 如果现有侧边栏配置中已存在该板块，合并
         const existingItem = existingSidebar.find((item) => item.text === subDir);
-        // console.log("🚀 ~ generateSidebar ~ existingItem:", existingItem)
         if (existingItem) {
-          existingItem.items = [...existingItem.items, ...markdownFiles];
+          items = [...existingItem.items, ...markdownFiles];
         } else {
           items.push(...markdownFiles);
         }
-  
+
         sidebar.push({
           text: subDir,
           link: `/${subDir}`,
