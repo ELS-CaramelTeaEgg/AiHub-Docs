@@ -41,7 +41,7 @@ async function generateSidebar(dir, existingSidebar) {
             const title = basename(f, ".md");
             return {
               text: title,
-              link: `/${subDir}/${title.replace(/\s+/g, "-").toLowerCase()}`,
+              link: `/${subDir}/${title.replace(/\s+/g, "-")}`,
             };
           });
   
