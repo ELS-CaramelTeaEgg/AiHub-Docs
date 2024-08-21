@@ -14,9 +14,7 @@ function createSidebarPlugin() {
       const sidebarConfig = config.vitepress.site.themeConfig.sidebar || [];
       const sidebar = await generateSidebar(docsDir, sidebarConfig);
       config.vitepress.site.themeConfig.sidebar = sidebar;
-    },
-
-    apply: 'build'
+    }
   };
 }
 
@@ -30,10 +28,12 @@ async function generateSidebar(dir, existingSidebar) {
       const filePath = join(dir, file);
       const stat = statSync(filePath);
       if (stat.isDirectory()) {
-        let items = [];
+        // let items = [];
         const subDir = file;
         const subDirPath = join(dir, subDir);
+        // const existingItem = existingSidebar.find((item) => item.text === subDir).map((item) => item.items);
   
+      
         // 读取子目录中的所有 Markdown 文件
         const markdownFiles = readdirSync(subDirPath)
           .filter((f) => f.endsWith(".md") && !f.startsWith("index"))
@@ -46,17 +46,17 @@ async function generateSidebar(dir, existingSidebar) {
           });
   
         // 如果现有侧边栏配置中已存在该板块，合并
-        const existingItem = existingSidebar.find((item) => item.text === subDir);
-        if (existingItem) {
-          items = [...existingItem.items, ...markdownFiles];
-        } else {
-          items.push(...markdownFiles);
-        }
+        // if (existingItem) {
+        //   items = [...existingItem.items, ...markdownFiles];
+        // } else {
+        //   items.push(...markdownFiles);
+        // }
+
 
         sidebar.push({
           text: subDir,
           link: `/${subDir}`,
-          items: items,
+          items: markdownFiles,
         });
       }
     }
